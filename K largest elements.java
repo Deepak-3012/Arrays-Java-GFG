@@ -1,53 +1,56 @@
 //{ Driver Code Starts
-//Initial Template for Java
-
 import java.util.*;
 import java.io.*;
 
+public class Main {
 
-class Main
-{
-    public static void main(String args[])
-    {
-        Scanner sc = new Scanner(System.in);
-        int t = sc.nextInt();
-        
-        while(t > 0)
-        {
-            int n = sc.nextInt();
-            int k = sc.nextInt();
-            
-            int arr[] = new int[n];
-            for(int i = 0; i<n; ++i)
-                arr[i] = sc.nextInt();
-            Solution ob = new Solution();
-            ArrayList<Integer> list = ob.kLargest(arr, n, k);
-            for(int i = 0; i<list.size(); i++)
-                System.out.print(list.get(i) + " ");
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int tc = Integer.parseInt(br.readLine().trim());
+        while (tc-- > 0) {
+            String[] inputLine;
+            inputLine = br.readLine().trim().split(" ");
+            int n = Integer.parseInt(inputLine[0]);
+            int k = Integer.parseInt(inputLine[1]);
+            int[] arr = new int[n];
+            inputLine = br.readLine().trim().split(" ");
+            for (int i = 0; i < n; i++) {
+                arr[i] = Integer.parseInt(inputLine[i]);
+            }
+
+            int[] ans = new Solution().kLargest(arr, n, k);
+            for (int x : ans) {
+                System.out.print(x + " ");
+            }
             System.out.println();
-            t--;
         }
     }
 }
 
-
-
 // } Driver Code Ends
 
-
-class Solution
-{
-    //Function to return k largest elements from an array.
-    public static ArrayList<Integer> kLargest(int arr[], int n, int k)
-    {
-        // code here 
-        Arrays.sort(arr);
-        ArrayList<Integer> al = new ArrayList<>();
-        int j=1;
-        for(int i=0;i<k;i++){
-            al.add(arr[n-j]);
-            j++;
+// TC - O(nlogk)
+// SC - O(k)
+class Solution {
+    int[] kLargest(int[] arr, int n, int k) {
+        // code here
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+        
+        for(int i=0; i<n; i++){
+            minHeap.add(arr[i]);
+            if(minHeap.size() > k){
+                minHeap.remove();
+            }
         }
-        return al;
+        int [] res = new int[k];
+        int i=k-1;
+        while(minHeap.size() > 0){
+            res[i] = minHeap.peek();
+            minHeap.remove();
+            i--;
+            
+        }
+        return res;
     }
+    
 }
