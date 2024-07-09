@@ -1,3 +1,3 @@
-# Arrays-Java-GFG
+# Java-GFG
 
-This repository contains java solutions for GeeksforGeeks problems on array data Structure.
+This repository contains java solutions for GeeksforGeeks problems on Data Structures and Algorithms.
